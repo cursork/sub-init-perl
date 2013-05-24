@@ -23,7 +23,7 @@ sub initialised_sub ($$) {
 			no warnings 'redefine';
 			*{$sub_name} = $after;
 		}
-		return $after->(@_);
+		return $after->(@args);
 	};
 
 	{
@@ -32,10 +32,7 @@ sub initialised_sub ($$) {
 	}
 }
 
-{
-	no warnings 'once';
-	*initialized_sub = *initialised_sub;
-}
+{ no warnings 'once'; *initialized_sub = *initialised_sub; }
 
 sub init (&$) { [@_] }
 sub after (&) { shift }
